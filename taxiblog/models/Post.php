@@ -50,12 +50,12 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'status' => 'Status',
-            'title' => 'Title',
-            'body' => 'Body',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'user_id' => 'Пользователь',
+            'status' => 'Статус',
+            'title' => 'Заголовок',
+            'body' => 'Текст',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

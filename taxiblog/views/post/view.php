@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */
@@ -25,6 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+
+    <?php
+      $model['user_id'] = $model->user->name;
+      $model['status'] = $model['status']==1 ? 'Доступно для чтения' : 'Скрыто';
+    ?>
 
     <?= DetailView::widget([
         'model' => $model,

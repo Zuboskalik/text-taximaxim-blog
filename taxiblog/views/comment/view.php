@@ -26,6 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <?php
+      $model['post_id'] = $model->post->title;
+    ?>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
