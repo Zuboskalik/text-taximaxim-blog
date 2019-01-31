@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
       $model['user_id'] = $model->user->name;
-      $model['status'] = $model['status']==1 ? 'Доступно для чтения' : 'Скрыто';
+      $model['status'] = array(2 => 'Черновик', 1 => 'Доступно для чтения', 0 =>'Скрыто')[$model['status']];
     ?>
 
     <?= DetailView::widget([
@@ -44,5 +44,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
         ],
     ]) ?>
+
+    <p>
+      <?= Html::a('Новый комментарий', ['/comment/create', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    </p>
+
+    Комментарии<?= empty($model->comments) ? ' отсутствуют' : ':' ?>
+
+    <?php foreach ($model->comments as $comment) { ?>
+
+    <?= DetailView::widget([
+        'model' => $comment,
+        'attributes' => [
+            'id',
+            'body:ntext',
+            'created_at',
+        ],
+    ]) ?>
+
+    <?php } ?>
 
 </div>

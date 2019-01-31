@@ -60,4 +60,8 @@ class Comment extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Post::className(), ['id' => 'post_id']);
     }
+     public function getPostname()
+     {
+         return $this->post->title;
+     }
 }

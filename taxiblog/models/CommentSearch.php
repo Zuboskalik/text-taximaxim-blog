@@ -17,8 +17,8 @@ class CommentSearch extends Comment
     public function rules()
     {
         return [
-            [['id', 'post_id'], 'integer'],
-            [['body', 'created_at', 'updated_at'], 'safe'],
+            [['id'], 'integer'],
+            [['body', 'post_id', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class CommentSearch extends Comment
      */
     public function search($params)
     {
-        $query = Comment::find();
+        $query = Comment::find()->joinWith(['post']);;
 
         // add conditions that should always apply here
 
@@ -59,10 +59,9 @@ class CommentSearch extends Comment
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'post_id' => $this->post_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ]);
+        ])->andFilterWhere(['like', 'posts.title', $this->post_id]);
 
         $query->andFilterWhere(['like', 'body', $this->body]);
 
