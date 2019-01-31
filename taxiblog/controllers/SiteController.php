@@ -7,6 +7,8 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use app\models\User;
+use app\models\SignupForm;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
@@ -69,6 +71,24 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
+
+     public function actionSignup()
+     {
+         $model = new SignupForm();
+
+         if ($model->load(Yii::$app->request->post())) {
+             if ($user = $model->signup()) {
+                 if (Yii::$app->getUser()->login($user)) {
+                     return $this->goHome();
+                 }
+             }
+         }
+
+         return $this->render('signup', [
+             'model' => $model,
+         ]);
+     }
+
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -125,4 +145,25 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionAddUsers() {
+        $users = [0 => 'deleted', 1 => 'admin', 2 => 'author', 3 => 'user'];
+
+        foreach ($users as $key => $value) {
+          $model = User::find()->where(['name' => $value])->one();
+          if (empty($model)) {
+              $user = new User();
+              $user->name = $value;
+              $user->role_id = $key;
+              $user->email = $value.'@test.test';
+              $user->setPassword($value);
+              $user->generateAuthKey();
+              if ($user->save()) {
+                  echo 'user '.$user->name.' created';
+              }
+          }
+        }
+
+    }
+
 }
