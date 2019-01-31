@@ -10,6 +10,8 @@ use Yii;
  * @property int $id
  * @property int $post_id
  * @property string $body
+ * @property string $created_at
+ * @property string $updated_at
  *
  * @property Post $post
  */
@@ -32,6 +34,7 @@ class Comment extends \yii\db\ActiveRecord
             [['post_id', 'body'], 'required'],
             [['post_id'], 'integer'],
             [['body'], 'string'],
+            [['created_at', 'updated_at'], 'safe'],
             [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Post::className(), 'targetAttribute' => ['post_id' => 'id']],
         ];
     }
@@ -45,6 +48,8 @@ class Comment extends \yii\db\ActiveRecord
             'id' => 'ID',
             'post_id' => 'Post ID',
             'body' => 'Body',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 
@@ -53,6 +58,6 @@ class Comment extends \yii\db\ActiveRecord
      */
     public function getPost()
     {
-        return $this->hasOne(Posts::className(), ['id' => 'post_id']);
+        return $this->hasOne(Post::className(), ['id' => 'post_id']);
     }
 }

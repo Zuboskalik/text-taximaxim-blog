@@ -12,7 +12,10 @@ use Yii;
  * @property int $status
  * @property string $title
  * @property string $body
+ * @property string $created_at
+ * @property string $updated_at
  *
+ * @property Comment[] $comments
  * @property User $user
  */
 class Post extends \yii\db\ActiveRecord
@@ -34,6 +37,7 @@ class Post extends \yii\db\ActiveRecord
             [['user_id', 'body'], 'required'],
             [['user_id', 'status'], 'integer'],
             [['body'], 'string'],
+            [['created_at', 'updated_at'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -50,7 +54,17 @@ class Post extends \yii\db\ActiveRecord
             'status' => 'Status',
             'title' => 'Title',
             'body' => 'Body',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComments()
+    {
+        return $this->hasMany(Comment::className(), ['post_id' => 'id']);
     }
 
     /**
@@ -58,6 +72,6 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(Users::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

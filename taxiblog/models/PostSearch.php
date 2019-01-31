@@ -18,7 +18,7 @@ class PostSearch extends Post
     {
         return [
             [['id', 'user_id', 'status'], 'integer'],
-            [['title', 'body'], 'safe'],
+            [['title', 'body', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -61,6 +61,8 @@ class PostSearch extends Post
             'id' => $this->id,
             'user_id' => $this->user_id,
             'status' => $this->status,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
