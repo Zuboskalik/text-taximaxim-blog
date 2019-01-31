@@ -22,6 +22,8 @@ class m190130_152640_create_posts_table extends Migration
             'status' => $this->integer()->defaultValue(1),
             'title' => $this->string(),
             'body' => $this->text()->notNull(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp(),
         ]);
 
         // creates index for column `user_id`

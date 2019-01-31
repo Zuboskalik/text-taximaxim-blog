@@ -3,26 +3,56 @@
 namespace app\models;
 
 use Yii;
-use yii\base\Model;
 
+/**
+ * This is the model class for table "comments".
+ *
+ * @property int $id
+ * @property int $post_id
+ * @property string $body
+ *
+ * @property Post $post
+ */
 class Comment extends \yii\db\ActiveRecord
 {
-    public $body;
-
-    public static function tableName() {
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
         return 'comments';
     }
 
-    public function rules() {
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
         return [
-            [['body'], 'required'],
+            [['post_id', 'body'], 'required'],
+            [['post_id'], 'integer'],
+            [['body'], 'string'],
+            [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Post::className(), 'targetAttribute' => ['post_id' => 'id']],
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function attributeLabels()
     {
         return [
-            'body' => 'body',
+            'id' => 'ID',
+            'post_id' => 'Post ID',
+            'body' => 'Body',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPost()
+    {
+        return $this->hasOne(Posts::className(), ['id' => 'post_id']);
     }
 }
