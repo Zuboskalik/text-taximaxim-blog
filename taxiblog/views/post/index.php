@@ -16,7 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
+      <?php if (!Yii::$app->user->isGuest) { ?>
         <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
+      <?php } ?>
     </p>
 
     <?= GridView::widget([
