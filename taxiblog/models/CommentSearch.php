@@ -18,7 +18,7 @@ class CommentSearch extends Comment
     {
         return [
             [['id'], 'integer'],
-            [['body', 'post_id', 'created_at', 'updated_at'], 'safe'],
+            [['body', 'post_id'], 'safe'],
         ];
     }
 
@@ -58,9 +58,7 @@ class CommentSearch extends Comment
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'comments.id' => $this->id
         ])->andFilterWhere(['like', 'posts.title', $this->post_id]);
 
         $query->andFilterWhere(['like', 'body', $this->body]);

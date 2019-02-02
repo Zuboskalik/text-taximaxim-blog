@@ -18,7 +18,7 @@ class PostSearch extends Post
     {
         return [
             [['id',  'status'], 'integer'],
-            [['title', 'body', 'user_id', 'created_at', 'updated_at'], 'safe'],
+            [['title', 'body', 'user_id'], 'safe'],
         ];
     }
 
@@ -58,9 +58,7 @@ class PostSearch extends Post
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'posts.id' => $this->id,
         ])->andFilterWhere(['like', 'users.name', $this->user_id]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
