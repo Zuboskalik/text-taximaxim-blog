@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <p>
-      <?= Html::a('Новый комментарий', ['/comment/create', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+      <?= Html::a('Новый комментарий', ['/comment/create', 'post_id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?php } else { ?>

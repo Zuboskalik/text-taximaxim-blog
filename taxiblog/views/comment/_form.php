@@ -13,9 +13,8 @@ use yii\helpers\ArrayHelper;
 <div class="comment-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <?php $model['post_id'] = isset($_GET['id']); ?>
 
-    <?= $form->field($model, 'post_id')->dropDownList(ArrayHelper::map(Post::find()->all(), 'id', 'title')) ?>
+    <?= $form->field($model, 'post_id')->hiddenInput(['value'=> $_GET['post_id']])->label(false) ?>
     <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
