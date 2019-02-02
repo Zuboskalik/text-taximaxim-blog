@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Comment */
@@ -13,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comment-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode('Комментарий к посту "'.$model->post->title.'"') ?></h1>
 
     <p>
         <?= Html::a('Оригинальный пост', ['/post/view', 'id' => $model->post->id], ['class' => 'btn btn-primary']) ?>
