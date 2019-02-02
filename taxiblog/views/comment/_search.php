@@ -23,8 +23,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'created_at') ?>
 
-    <?= $form->field($model, 'updated_at') ?>
-
     <div class="form-group">
         <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Очистить', ['class' => 'btn btn-default']) ?>

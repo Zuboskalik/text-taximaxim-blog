@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Comment */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Comments', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Комментарии', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -17,6 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Оригинальный пост', ['/post/view', 'id' => $model->post->id], ['class' => 'btn btn-primary']) ?>
+
+        <?php
+        $user = User::FindOne(['id' => Yii::$app->user->id]);
+        if (!Yii::$app->user->isGuest && $user->role_id==1) { ?>
         <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -25,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?php } ?>
     </p>
 
     <?php
@@ -37,8 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'post_id',
             'body:ntext',
-            'created_at',
-            'updated_at',
+            'created_at'
         ],
     ]) ?>
 

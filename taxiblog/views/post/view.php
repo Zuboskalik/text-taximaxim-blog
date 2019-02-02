@@ -8,7 +8,7 @@ use app\models\User;
 /* @var $model app\models\Post */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -17,14 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php
+        $user = User::FindOne(['id' => Yii::$app->user->id]);
+        if ($user->id == 2 || $model->user_id==$user->id) {
+        ?>
+          <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php
+        }
+        ?>
     </p>
 
     <?php
@@ -40,8 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'title',
             'body:ntext',
-            'created_at',
-            'updated_at',
+            'created_at'
         ],
     ]) ?>
 

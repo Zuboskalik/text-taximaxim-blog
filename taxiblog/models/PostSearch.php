@@ -17,8 +17,8 @@ class PostSearch extends Post
     public function rules()
     {
         return [
-            [['id', 'user_id', 'status'], 'integer'],
-            [['title', 'body', 'created_at', 'updated_at'], 'safe'],
+            [['id',  'status'], 'integer'],
+            [['title', 'body', 'user_id', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class PostSearch extends Post
      */
     public function search($params)
     {
-        $query = Post::find();
+        $query = Post::find()->joinWith(['user']);
 
         // add conditions that should always apply here
 
@@ -59,11 +59,9 @@ class PostSearch extends Post
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ]);
+        ])->andFilterWhere(['like', 'users.name', $this->user_id]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'body', $this->body]);

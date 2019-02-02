@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\CommentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Comments';
+$this->title = 'Комментарии';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comment-index">
@@ -34,8 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'body:ntext',
             'created_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

@@ -74,4 +74,9 @@ class Post extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+    public function getStatusname()
+    {
+
+        return array(2 => 'Черновик', 1 => 'Доступно для чтения', 0 =>'Скрыто')[$this->status];
+    }
 }

@@ -40,7 +40,7 @@ class CommentSearch extends Comment
      */
     public function search($params)
     {
-        $query = Comment::find()->joinWith(['post']);;
+        $query = Comment::find()->joinWith(['post']);
 
         // add conditions that should always apply here
 
