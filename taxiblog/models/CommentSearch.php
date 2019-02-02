@@ -61,7 +61,7 @@ class CommentSearch extends Comment
             'comments.id' => $this->id
         ])->andFilterWhere(['like', 'posts.title', $this->post_id]);
 
-        $query->andFilterWhere(['like', 'body', $this->body]);
+        $query->andFilterWhere(['like', 'comments.body', $this->body]);
 
         return $dataProvider;
     }

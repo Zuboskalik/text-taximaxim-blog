@@ -17,7 +17,7 @@ class PostSearch extends Post
     public function rules()
     {
         return [
-            [['id',  'status'], 'integer'],
+            [['id'], 'integer'],
             [['title', 'body', 'user_id'], 'safe'],
         ];
     }
@@ -61,8 +61,8 @@ class PostSearch extends Post
             'posts.id' => $this->id,
         ])->andFilterWhere(['like', 'users.name', $this->user_id]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'body', $this->body]);
+        $query->andFilterWhere(['like', 'posts.title', $this->title])
+            ->andFilterWhere(['like', 'posts.body', $this->body]);
 
         return $dataProvider;
     }
