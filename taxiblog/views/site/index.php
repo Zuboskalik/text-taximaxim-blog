@@ -11,7 +11,7 @@ $this->title = 'taxiblog';
 
         <p class="lead">Блог Taxiblog</p>
         <p>
-          Для начала работы запустите миграции БД (команда "yii migrate" в консоли) и запустите команду add-users из SiteController (например, "http://dev-blog/taxiblog/web/index.php?r=site/add-users")
+          Для начала работы укажите данные БД в файле "*\config\db.php" (по умолчанию host="localhost", dbname="taxiblog", username="root", password=""), запустите миграции БД (команда "yii migrate" в консоли) и запустите команду add-users из SiteController (например, "http://dev-blog/taxiblog/web/index.php?r=site/add-users")
         </p>
         <p>
           Это создаст тестовых пользователей:
